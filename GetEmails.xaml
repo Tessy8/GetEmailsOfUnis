@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetEmails" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="834,705" sap2010:WorkflowViewState.IdRef="GetEmails_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetEmails" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="834,1303" sap2010:WorkflowViewState.IdRef="GetEmails_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:str="clr-namespace:System.Text.RegularExpressions;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
       <x:String>System.Activities</x:String>
@@ -67,7 +67,6 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
@@ -79,12 +78,14 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow gets the emails of the unis." DisplayName="GetEmails" sap:VirtualizedContainerService.HintSize="242,640" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow gets the emails of the unis." DisplayName="GetEmails" sap:VirtualizedContainerService.HintSize="480,1238" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="UniTable" />
       <Variable x:TypeArguments="x:Int32" Name="Count" />
+      <Variable x:TypeArguments="x:String" Name="RowCount" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -92,7 +93,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message (Start)" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Getting emails of unis...&quot;]">
+    <ui:LogMessage DisplayName="Log Message (Start)" sap:VirtualizedContainerService.HintSize="438,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Getting emails of unis...&quot;]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -100,18 +101,18 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,314" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[UniTable]" DisplayName="Read Range List Of Unis" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="List Of Unis.xlsx">
+        <ui:ReadRange AddHeaders="True" DataTable="[UniTable]" DisplayName="Read Range List Of Unis" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" Range="A405:C505" SheetName="Sheet1" WorkbookPath="List Of Unis.xlsx">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -129,7 +130,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message (Error)" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;There was an error while reading ListOfUni excel file.&quot;]">
+            <ui:LogMessage DisplayName="Log Message (Error)" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;There was an error while reading ListOfUni excel file.&quot;]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -141,15 +142,16 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="List Of Unis with Emails.xlsx">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:DeleteFileX>
-    <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Email Address" DataTable="[UniTable]" DisplayName="Add Email Address Data Column" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
+    <Assign sap:VirtualizedContainerService.HintSize="438,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[RowCount]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[UniTable.RowCount.ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="438,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[RowCount.ToString]" />
+    <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="Email Address" DataTable="[UniTable]" DisplayName="Add Email Address Data Column" sap:VirtualizedContainerService.HintSize="438,51" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -157,7 +159,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:AddDataColumn>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="438,51" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
@@ -182,33 +184,33 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <TryCatch DisplayName="Try to search for email" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try to search for email" sap:VirtualizedContainerService.HintSize="438,287" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Google" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="3d599fa9-2f7e-408d-8f73-bb6aa457c641" Version="V2">
+        <uix:NApplicationCard WebDriverMode="{x:Null}" AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Google" sap:VirtualizedContainerService.HintSize="510,1218" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="3d599fa9-2f7e-408d-8f73-bb6aa457c641" Version="V2">
           <uix:NApplicationCard.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,236" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,1002" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[UniTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[UniTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="434,817" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="272,699" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="272,701" sap2010:WorkflowViewState.IdRef="Sequence_3">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:String" Name="ExtText" />
                           <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="FoundEmail" />
@@ -223,7 +225,7 @@
                           <uix:NTypeInto.Target>
                             <uix:TargetAnchorable DesignTimeRectangle="150, 48, 952, 24" ElementType="InputBox" FriendlyName="'google.com'" FullSelectorArgument="&lt;ctrl name='Google - Google Chrome - Testimony (Tessy)' role='pane' /&gt;&lt;ctrl name='Google Chrome' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Google - Google Chrome - Testimony (Tessy)' role='pane' /&gt;&lt;ctrl name='Google Chrome' role='pane' /&gt;&lt;ctrl name='Address and search bar' role='editable text' automationid='' /&gt;" Guid="31cd4055-1bf2-4689-bcb5-e470f3d2d5e7" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAA7wAAAAcCAYAAABCt7NEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKzSURBVHhe7dxvTtswHIDh3aVUcE8Qp6Gco9yhHKInyPLPyc+J03VaJxHrsfRMiMSxu2+vnPLr6fjSAAAAQG0ELwAAAFXKgvdwfM4uAgAAwF4sm3YK3sOT2AUAAGDfYtt6pRkAAIAqCV4AAACqJHgBAACokuAFAACgSoIXAACAKv2w4H1vztemuZxK1wAAAOB+ghcAAIAqCV4AAACqtAjeITjTuJw+m0tzbc5v8z2v8YZ2XM/vYX7r9D1eGcflM79+7J6ZRvvs01f773fz0V9bB2++XrqvJN97c/1qXku/L32edo8f06aGNeK6q88IAADAjxeCdwjDGHdDBM6BOERgjM4hXqdA7WM3BuXymYv7pxgtB2+/3hSuc5wOc6PC3s/dvPH5cU6/x/kzpLBNa6bwnZ61uB8AAIB9mIP3LZ60JvGEN4/RJEZoF4ur09AuGFO0xp+TbN24Rmm9bj+F+Cw9t1P8TPlzVxG9Ctz4fwAAAMBezMFbjMYYexvhN80rB3GMzuIJ7WbwduuVxnoPmye/GyEcw3w1t9tPNkfwAgAA7FEevMvT0D5GU+xtBG0379YJbwjIPi6XAZqtG9fofr4zNDfCNo/pWbfPzRNewQsAAFCF8B3e4UQ1+x5sf8Q6x14fh1lADnOmCO7jNcbhELDTM/sADfeP18vBuxHIo35vU6gW9v433+EVvAAAANUJwdsagzSNe/5K8xyvoz4o57E68c2ut8/+w19pHqI7jHCanIXqGL3TmK6lqE4jP/EVvAAAAHXKg3epD+A8EB9u63VkAAAA+Ac3grfwOvDDrV9FBgAAgEcIwbt89bcdD4/dxWvH7RC7AAAA/A+3X2kGAACAnRK8AAAAVGkK3sPT8+oiAAAA7Els2+yE93AUvQAAAOzTsmm90gwAAECVBC8AAAAVeml+A0ZDxGtnDyFpAAAAAElFTkSuQmCC" InformativeScreenshot="ed13e8ace9b0e599ad3c2c8bf05e5b67.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Google - Google Chrome' /&gt;" SearchSteps="Selector, FuzzySelector, Image" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
-                                <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                                   <uix:Target DesignTimeRectangle="118, 48, 32, 24" ElementType="Button" FriendlyName="'menu button'" FullSelectorArgument="&lt;ctrl name='Google - Google Chrome - Testimony (Tessy)' role='pane' /&gt;&lt;ctrl name='Google Chrome' role='pane' /&gt;&lt;ctrl name='View site information' role='menu button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Google - Google Chrome - Testimony (Tessy)' role='pane' /&gt;&lt;ctrl name='Google Chrome' role='pane' /&gt;&lt;ctrl name='View site information' role='menu button' automationid='' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACQAAAAcCAYAAAAJKR1YAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGDSURBVFhHzZdLTsMwEIZ9l+ZFkuZFInEhWHQBJ2CBispLIMQCIRaIFTs4B70DPUROMHgsUqXw4zyqNF58iuOZUX6Nx/FYFEVBTSRJSkEYkev55Lh7ZNneYPwrKM9zmkYx2Q4OHAooKI4TmQkfBgzJxHb/CmIxyHloJparnhuCYlkrlWEs1oLSNIMOu0YJ4gJ2R6gZhBLEuwkZx0Dsy+zYwNCGIEzocHZM1/ePCh4jvy6IaItddTQ7odOzC8ryAwWPeQ75tkX4wRQa2vDw9KKEVO88vpGZqvt0RXheAA1teH59azXXBWE7/c6m+eWd+jhifnULY5pZkLB6/giRkDooRs+CPksySND5kkpa9V8yJKIOitHyviIqlyS4x4EODSARdVCMFhbEGfKDEDs0gETUQTF6PuhLShLcDWIHPdpdJm0ophFZR+osM+VgZZSgsZoyxLofGj9LP/+hSlCaGdSgVZiwdBuCmL67bltgk1+RyeUz5hpUwX12FCVmXBR/s7urtEffPscpYvPy4jAAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
                                 </scg:List>
                               </uix:TargetAnchorable.Anchors>
@@ -240,7 +242,7 @@
                           <uix:NGetText.Target>
                             <uix:TargetAnchorable BrowserURL="https://www.google.com/search?q=Email+of+Princeton+University&amp;sxsrf=ALiCzsagjogjI8Umapx-bTH6F_0fMfP_jQ%3A1656339280866&amp;ei=ULu5YqKwNP2Dxc8P9YywgAk&amp;ved=0ahUKEwiimNrT6M34AhX9QfEDHXUGDJAQ4dUDCA4&amp;uact=5&amp;oq=Email+of+Princeton+University&amp;gs_lcp=Cgdnd3Mtd2l6EAM6BwgAEEcQsAM6CggAEOQCELADGAE6BwgjELACECc6BggAEB4QBzoECAAQDToICAAQHhAIEAc6CggAEB4QDxAIEAdKBAhBGABKBAhGGAFQiAtY1CRglydoAnABeACAAdwCiAH8E5IBBTItOS4xmAEAoAEByAENwAEB2gEGCAEQARgJ&amp;sclient=gws-wiz" DesignTimeRectangle="50, 384, 978, 179" FriendlyName="'Note: If'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;block-component&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' parentid='rso' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' parentid='rso' tag='DIV' class='V3FYCf' aaname='' /&gt;" Guid="862f39d2-dc7d-4f0b-878c-933ca5e7489f" InformativeScreenshot="a0fcb700fab9b16955887065b5c85b81.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Email of Princeton University - Google Search' /&gt;" SearchSteps="FuzzySelector" Visibility="Interactive">
                               <uix:TargetAnchorable.Anchors>
-                                <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                                   <uix:Target DesignTimeRectangle="-1, 159, 225, 56" FriendlyName="'DIV'" FullSelectorArgument="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;form&amp;gt;div&amp;gt;div&amp;gt;div' parentid='tsf' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' parentid='tsf' tag='DIV' class='logo' aaname='' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector, Image" />
                                 </scg:List>
                               </uix:TargetAnchorable.Anchors>
@@ -256,7 +258,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </uix:NGetText>
-                        <ui:Matches BuilderPattern="((?&gt;[a-zA-Z\d!#$%&amp;'*+\-\/=?^_`{|}~]+\x20*|&quot;((?=[\x01-\x7f])[^&quot;\\]|\\[\x01-\x7f])*&quot;\x20*)*(?&lt;angle&gt;&lt;))?((?!\.)(?&gt;\.?[a-zA-Z\d!#$%&amp;'*+\-\/=?^_`{|}~]+)+|&quot;((?=[\x01-\x7f])[^&quot;\\]|\\[\x01-\x7f])*&quot;)@(((?!-)[a-zA-Z\d\-]+(?&lt;!-)\.)+[a-zA-Z]{2,}|\[(((?(?&lt;!\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])[^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)&gt;)+" DisplayName="Matches Email" sap:VirtualizedContainerService.HintSize="230,51" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[ExtText]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;EMAIL&quot;,&quot;OperationName&quot;:&quot;Email&quot;,&quot;OperationValue&quot;:&quot;((?&gt;[a-zA-Z\\d!#$%&amp;'*+\\-\\\/=?^_`{|}~]+\\x20*|\&quot;((?=[\\x01-\\x7f])[^\&quot;\\\\]|\\\\[\\x01-\\x7f])*\&quot;\\x20*)*(?&lt;angle&gt;&lt;))?((?!\\.)(?&gt;\\.?[a-zA-Z\\d!#$%&amp;'*+\\-\\\/=?^_`{|}~]+)+|\&quot;((?=[\\x01-\\x7f])[^\&quot;\\\\]|\\\\[\\x01-\\x7f])*\&quot;)@(((?!-)[a-zA-Z\\d\\-]+(?&lt;!-)\\.)+[a-zA-Z]{2,}|\\[(((?(?&lt;!\\[)\\.)(25[0-5]|2[0-4]\\d|[01]?\\d?\\d)){4}|[a-zA-Z\\d\\-]*[a-zA-Z\\d]:((?=[\\x01-\\x7f])[^\\\\\\[\\]]|\\\\[\\x01-\\x7f])+)\\])(?(angle)&gt;)&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="((?&gt;[a-zA-Z\d!#$%&amp;'*+\-\/=?^_`{|}~]+\x20*|&quot;((?=[\x01-\x7f])[^&quot;\\]|\\[\x01-\x7f])*&quot;\x20*)*(?&lt;angle&gt;&lt;))?((?!\.)(?&gt;\.?[a-zA-Z\d!#$%&amp;'*+\-\/=?^_`{|}~]+)+|&quot;((?=[\x01-\x7f])[^&quot;\\]|\\[\x01-\x7f])*&quot;)@(((?!-)[a-zA-Z\d\-]+(?&lt;!-)\.)+[a-zA-Z]{2,}|\[(((?(?&lt;!\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])[^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)&gt;)+" RegexOption="IgnoreCase, Compiled" Result="[FoundEmail]">
+                        <ui:Matches BuilderPattern="(?:[a-zA-Z])+(\d*)@(\w+)(.)(?:[a-z])+" DisplayName="Matches Email" sap:VirtualizedContainerService.HintSize="230,51" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[ExtText]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;[a-zA-Z]&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null},{&quot;Index&quot;:1,&quot;OperationID&quot;:&quot;DIG&quot;,&quot;OperationName&quot;:&quot;Digit&quot;,&quot;OperationValue&quot;:&quot;\\d&quot;,&quot;QuantifierFirstValue&quot;:&quot;*&quot;,&quot;QuantifierID&quot;:&quot;ANY&quot;,&quot;QuantifierName&quot;:&quot;Any (0 or more)&quot;,&quot;QuantifierSecondValue&quot;:null},{&quot;Index&quot;:2,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;@&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null},{&quot;Index&quot;:3,&quot;OperationID&quot;:&quot;ANYWCHAR&quot;,&quot;OperationName&quot;:&quot;Any word character&quot;,&quot;OperationValue&quot;:&quot;\\w&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null},{&quot;Index&quot;:4,&quot;OperationID&quot;:&quot;ANYTHING&quot;,&quot;OperationName&quot;:&quot;Anything&quot;,&quot;OperationValue&quot;:&quot;.&quot;,&quot;QuantifierFirstValue&quot;:&quot;1&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null},{&quot;Index&quot;:5,&quot;OperationID&quot;:&quot;LIT&quot;,&quot;OperationName&quot;:&quot;Literal&quot;,&quot;OperationValue&quot;:&quot;[a-z]&quot;,&quot;QuantifierFirstValue&quot;:&quot;+&quot;,&quot;QuantifierID&quot;:&quot;OOM&quot;,&quot;QuantifierName&quot;:&quot;At least one (1 or more)&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="(?:[a-zA-Z])+(\d*)@(\w+)(.)(?:[a-z])+" RegexOption="Compiled" Result="[FoundEmail]">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -359,12 +361,12 @@
                   </ui:ForEachRow.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEachRow>
-                <ui:LogMessage DisplayName="Log Message (End)" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Gotten emails of unis.&quot;]">
+                <ui:LogMessage DisplayName="Log Message (End)" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Gotten emails of unis.&quot;]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -380,7 +382,7 @@
           </uix:NApplicationCard.TargetApp>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -398,7 +400,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message (Error)" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;There was an error while finding email.&quot;]">
+            <ui:LogMessage DisplayName="Log Message (Error)" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;There was an error while finding email.&quot;]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -410,19 +412,14 @@
         </Catch>
       </TryCatch.Catches>
       <TryCatch.Finally>
-        <ui:WriteRange AddHeaders="True" DataTable="[UniTable]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Sheet1" WorkbookPath="List Of Unis with Emails.xlsx">
-          <ui:WriteRange.StartingCell>
-            <InArgument x:TypeArguments="x:String">
-              <Literal x:TypeArguments="x:String" Value="" />
-            </InArgument>
-          </ui:WriteRange.StartingCell>
+        <ui:AppendRange DataTable="[UniTable]" DisplayName="Append Range" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="Sheet1" WorkbookPath="List Of Unis with Emails.xlsx">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-        </ui:WriteRange>
+        </ui:AppendRange>
       </TryCatch.Finally>
     </TryCatch>
   </Sequence>
